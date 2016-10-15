@@ -3,6 +3,7 @@
 namespace Mateusjatenee\SimpleCart\Tests;
 
 use Mateusjatenee\SimpleCart\Cart;
+use Mateusjatenee\SimpleCart\Item;
 use Mateusjatenee\SimpleCart\Providers\SimpleCartServiceProvider;
 use Mateusjatenee\SimpleCart\SimpleCart;
 use Orchestra\Testbench\TestCase;
@@ -27,16 +28,10 @@ class SimpleCartTest extends TestCase
     {
         $cart = $this->getCart();
 
-        $cart->add(123, 'Regular T-Shirt', 1, 20);
+        $item = $cart->add(123, 'Regular T-Shirt', 1, 20);
 
-        $this->assertEquals([
-            [
-                'id' => 123,
-                'name' => 'Regular T-Shirt',
-                'quantity' => 1,
-                'price' => 20,
-            ],
-        ], $cart->content()->all());
+        $this->assertInstanceOf(Item::class, $cart->content()->first());
+        $this->assertEquals($item, $cart->content()->first());
     }
 
     private function getCart()
