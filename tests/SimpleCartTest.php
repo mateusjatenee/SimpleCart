@@ -3,6 +3,7 @@
 namespace Mateusjatenee\SimpleCart\Tests;
 
 use Mateusjatenee\SimpleCart\Cart;
+use Mateusjatenee\SimpleCart\Exceptions\ItemNotFoundException;
 use Mateusjatenee\SimpleCart\Item;
 use Mateusjatenee\SimpleCart\Providers\SimpleCartServiceProvider;
 use Mateusjatenee\SimpleCart\SimpleCart;
@@ -44,6 +45,16 @@ class SimpleCartTest extends TestCase
         $item = $cart->find(123);
 
         $this->assertEquals($created_item, $item);
+    }
+
+    /** @test */
+    public function it_throws_exception_if_item_is_not_found()
+    {
+        $this->setExpectedException(ItemNotFoundException::class, 'Item of id 123 was not found.');
+
+        $cart = $this->getCart();
+
+        $cart->find(123);
     }
 
     private function getCart()

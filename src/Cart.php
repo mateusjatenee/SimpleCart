@@ -5,6 +5,7 @@ namespace Mateusjatenee\SimpleCart;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Session\SessionManager;
 use Illuminate\Support\Collection;
+use Mateusjatenee\SimpleCart\Exceptions\ItemNotFoundException;
 use Mateusjatenee\SimpleCart\Item;
 
 class Cart
@@ -35,6 +36,17 @@ class Cart
         }
 
         return $this->session->get($this->cartName);
+    }
+
+    public function find($id)
+    {
+        $content = $this->getContent();
+
+        if (!$content->has($id)) {
+            throw (new ItemNotFoundException)->setItemId($id);
+        }
+
+        return $content->get($id);
     }
 
     private function hasItems()
