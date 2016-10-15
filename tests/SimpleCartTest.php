@@ -34,6 +34,18 @@ class SimpleCartTest extends TestCase
         $this->assertEquals($item, $cart->content()->first());
     }
 
+    /** @test */
+    public function it_finds_items_in_the_cart()
+    {
+        $cart = $this->getCart();
+
+        $created_item = $cart->add(123, 'Regular T-Shirt', 1, 20);
+
+        $item = $cart->find(123);
+
+        $this->assertEquals($created_item, $item);
+    }
+
     private function getCart()
     {
         $session_manager = $this->app->make('session');
