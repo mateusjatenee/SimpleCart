@@ -7,9 +7,8 @@ use Mateusjatenee\SimpleCart\Exceptions\ItemNotFoundException;
 use Mateusjatenee\SimpleCart\Item;
 use Mateusjatenee\SimpleCart\Providers\SimpleCartServiceProvider;
 use Mateusjatenee\SimpleCart\SimpleCart;
-use Orchestra\Testbench\TestCase;
 
-class SimpleCartTest extends TestCase
+class SimpleCartTest extends \Orchestra\Testbench\TestCase
 {
 
     /**
