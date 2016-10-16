@@ -58,7 +58,11 @@ class SimpleCartTest extends \Orchestra\Testbench\TestCase
 
     public function it_edits_an_item()
     {
+        $cart = $this->getCart();
 
+        $item = $this->addItem($cart);
+
+        dd($item);
     }
 
     private function addItem($cart, $id = 123, $name = 'Regular T-Shirt', $quantity = 1, $price = 20)
