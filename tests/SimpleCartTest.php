@@ -56,13 +56,23 @@ class SimpleCartTest extends \Orchestra\Testbench\TestCase
         $cart->find(123);
     }
 
+    /** @test */
     public function it_edits_an_item()
     {
         $cart = $this->getCart();
 
         $item = $this->addItem($cart);
 
-        dd($item);
+        $new_attributes = [
+            'id' => 41,
+            'name' => 'Nice T-Shirt',
+            'quantity' => 5,
+            'price' => 30,
+        ];
+
+        $item->update($new_attributes);
+
+        $this->assertEquals($new_attributes, $item->toArray());
     }
 
     private function addItem($cart, $id = 123, $name = 'Regular T-Shirt', $quantity = 1, $price = 20)
