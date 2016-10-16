@@ -28,7 +28,7 @@ class SimpleCartTest extends \Orchestra\Testbench\TestCase
     {
         $cart = $this->getCart();
 
-        $item = $cart->add(123, 'Regular T-Shirt', 1, 20);
+        $item = $this->addItem($cart);
 
         $this->assertInstanceOf(Item::class, $cart->content()->first());
         $this->assertEquals($item, $cart->content()->first());
@@ -39,7 +39,7 @@ class SimpleCartTest extends \Orchestra\Testbench\TestCase
     {
         $cart = $this->getCart();
 
-        $created_item = $cart->add(123, 'Regular T-Shirt', 1, 20);
+        $created_item = $this->addItem($cart);
 
         $item = $cart->find(123);
 
@@ -54,6 +54,16 @@ class SimpleCartTest extends \Orchestra\Testbench\TestCase
         $cart = $this->getCart();
 
         $cart->find(123);
+    }
+
+    public function it_edits_an_item()
+    {
+
+    }
+
+    private function addItem($cart, $id = 123, $name = 'Regular T-Shirt', $quantity = 1, $price = 20)
+    {
+        return $cart->add($id, $name, $quantity, $price);
     }
 
     private function getCart()
